@@ -39,7 +39,7 @@
       if (jotatedTransliterationMap[char]) {
         let jotatedTransliteratedChar = jotatedTransliterationMap[char];
         if ( ! isPrevConsonant) {
-          if (prevChar === 'j') {
+          if (prevTransliteratedChar === 'j') {
             transliteratedChar = jotatedTransliteratedChar.replace(/j/, '');
           } else {
             transliteratedChar = jotatedTransliteratedChar;
