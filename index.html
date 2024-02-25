@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transliteration Tool</title>
+</head>
+<body>
+
+<h2>Transliteration Tool: Russian to Croatian</h2>
+
+<textarea id="inputText" placeholder="Enter Russian text"></textarea>
+<button onclick="transliterate()">Transliterate</button>
+<p id="outputText"></p>
+
+<script>
+  function transliterate() {
+    const inputText = document.getElementById('inputText').value;
+
+    const transliterationMap = {
+      'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'ž', 'з': 'z', 'и': 'i',
+      'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+      'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'č', 'ш': 'š', 'щ': 'šč', 'ъ': 'j', 'ы': 'y', 'ь': 'j',
+      'э': 'e', 'ю': 'iu', 'я': 'ia'
+    };
+
+    const jotatedTransliterationMap = {
+      'е': 'je', 'ё': 'jo', 'ю': 'ju', 'я': 'ja'
+    };
+
+    let outputText = '';
+    let isPrevConsonant = false;
+    let prevTransliteratedChar = '';
+
+    for (let i = 0; i < inputText.length; i++) {
+      const char = inputText[i].toLowerCase();
+      let transliteratedChar = transliterationMap[char] || char;
+
+      if (jotatedTransliterationMap[char]) {
+        let jotatedTransliteratedChar = jotatedTransliterationMap[char];
+        if ( ! isPrevConsonant) {
+          if (prevChar === 'j') {
+            transliteratedChar = jotatedTransliteratedChar.replace(/j/, '');
+          } else {
+            transliteratedChar = jotatedTransliteratedChar;
+          }
+        }
+      }
+
+      outputText += char === inputText[i] ? transliteratedChar : transliteratedChar.toUpperCase();
+
+      isPrevConsonant = 'бвгджзклмнпрстфхцчшщ'.includes(char);
+      prevTransliteratedChar = transliteratedChar;
+    }
+
+    document.getElementById('outputText').innerText = outputText;
+  }
+</script>
+
+</body>
+</html>
