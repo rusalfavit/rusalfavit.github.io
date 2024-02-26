@@ -38,7 +38,7 @@
 
       if (jotatedTransliterationMap[char]) {
         let jotatedTransliteratedChar = jotatedTransliterationMap[char];
-        if ( ! isPrevConsonant) {
+        if (!isPrevConsonant) {
           if (prevTransliteratedChar === 'j') {
             transliteratedChar = jotatedTransliteratedChar.replace(/j/, '');
           } else {
@@ -47,7 +47,8 @@
         }
       }
 
-      outputText += char === inputText[i] ? transliteratedChar : transliteratedChar.toUpperCase();
+      outputText += char === inputText[i] ? transliteratedChar.charAt(0) : transliteratedChar.charAt(0).toUpperCase();
+      outputText += transliteratedChar.slice(1);
 
       isPrevConsonant = 'бвгджзклмнпрстфхцчшщ'.includes(char);
       prevTransliteratedChar = transliteratedChar;
