@@ -8,25 +8,57 @@
 </head>
 <body>
 
-<div class="container-fluid">
-    <div class="row">
-        <!-- Left Panel for Source Text -->
-        <div class="col-md-6">
-            <h3>Source Text</h3>
-            <textarea class="form-control" rows="10" id="inputText"></textarea>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">RusAlfavit</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#translation">Транслитерация</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#examples">Примеры</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#about">О проекте</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid mt-3">
+    <div class="tab-content">
+        <!-- Translation Tab -->
+        <div class="tab-pane fade show active" id="translation">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="font-weight-bold">Исходный текст</p>
+                    <textarea class="form-control" rows="20" id="sourceText"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <p class="font-weight-bold">Результат</p>
+                    <textarea class="form-control" rows="20" id="translatedText" readonly></textarea>
+                </div>
+            </div>
         </div>
 
-        <!-- Right Panel for Translated Text -->
-        <div class="col-md-6">
-            <h3>Translated Text</h3>
-            <p id="outputText"></p>
+        <!-- Examples Tab -->
+        <div class="tab-pane fade" id="examples">
+            <p>Examples content goes here.</p>
+        </div>
+
+        <!-- About Project Tab -->
+        <div class="tab-pane fade" id="about">
+            <p>About Project content goes here.</p>
         </div>
     </div>
 
     <!-- Translation Button -->
     <div class="row mt-3">
         <div class="col-md-6 offset-md-3 text-center">
-            <button class="btn btn-primary" onclick="transliterate()">Transliterate</button>
+            <button class="btn btn-primary" onclick="transliterate()">Транслитерировать</button>
         </div>
     </div>
 </div>
@@ -36,51 +68,51 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Translation Script -->
+<!-- Your Translation Script -->
 <script>
-  function transliterate() {
-    const inputText = document.getElementById('inputText').value;
-
-    const transliterationMap = {
-      'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'ž', 'з': 'z', 'и': 'i',
-      'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
-      'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'č', 'ш': 'š', 'щ': 'šč', 'ъ': 'j', 'ы': 'y', 'ь': 'j',
-      'э': 'e', 'ю': 'iu', 'я': 'ia'
-    };
-
-    const jotatedTransliterationMap = {
-      'е': 'je', 'ё': 'jo', 'ю': 'ju', 'я': 'ja'
-    };
-
-    let outputText = '';
-    let isPrevConsonant = false;
-    let prevTransliteratedChar = '';
-
-    for (let i = 0; i < inputText.length; i++) {
-      const char = inputText[i].toLowerCase();
-      let transliteratedChar = transliterationMap[char] || char;
-
-      if (jotatedTransliterationMap[char]) {
-        let jotatedTransliteratedChar = jotatedTransliterationMap[char];
-        if (!isPrevConsonant) {
-          if (prevTransliteratedChar === 'j') {
-            transliteratedChar = jotatedTransliteratedChar.replace(/j/, '');
-          } else {
-            transliteratedChar = jotatedTransliteratedChar;
+    function transliterate() {
+      const inputText = document.getElementById('sourceText').value;
+  
+      const transliterationMap = {
+        'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'ž', 'з': 'z', 'и': 'i',
+        'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+        'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'č', 'ш': 'š', 'щ': 'šč', 'ъ': 'j', 'ы': 'y', 'ь': 'j',
+        'э': 'e', 'ю': 'iu', 'я': 'ia'
+      };
+  
+      const jotatedTransliterationMap = {
+        'е': 'je', 'ё': 'jo', 'ю': 'ju', 'я': 'ja'
+      };
+  
+      let outputText = '';
+      let isPrevConsonant = false;
+      let prevTransliteratedChar = '';
+  
+      for (let i = 0; i < inputText.length; i++) {
+        const char = inputText[i].toLowerCase();
+        let transliteratedChar = transliterationMap[char] || char;
+  
+        if (jotatedTransliterationMap[char]) {
+          let jotatedTransliteratedChar = jotatedTransliterationMap[char];
+          if (!isPrevConsonant) {
+            if (prevTransliteratedChar === 'j') {
+              transliteratedChar = jotatedTransliteratedChar.replace(/j/, '');
+            } else {
+              transliteratedChar = jotatedTransliteratedChar;
+            }
           }
         }
+  
+        outputText += char === inputText[i] ? transliteratedChar.charAt(0) : transliteratedChar.charAt(0).toUpperCase();
+        outputText += transliteratedChar.slice(1);
+  
+        isPrevConsonant = 'бвгджзклмнпрстфхцчшщ'.includes(char);
+        prevTransliteratedChar = transliteratedChar;
       }
-
-      outputText += char === inputText[i] ? transliteratedChar.charAt(0) : transliteratedChar.charAt(0).toUpperCase();
-      outputText += transliteratedChar.slice(1);
-
-      isPrevConsonant = 'бвгджзклмнпрстфхцчшщ'.includes(char);
-      prevTransliteratedChar = transliteratedChar;
+  
+      document.getElementById('translatedText').innerHTML = outputText;
     }
-
-    document.getElementById('outputText').innerText = outputText;
-  }
-</script>
+  </script>
 
 </body>
 </html>
