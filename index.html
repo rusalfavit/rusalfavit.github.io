@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,28 +11,21 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">RusAlfavit</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#translation">Транслитерация</a>
+                <a class="nav-link" href="index.html">Транслитерация</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#examples">Примеры</a>
+                <a class="nav-link" href="examples.html">Примеры</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#about">О проекте</a>
+                <a class="nav-link" href="about.html">О проекте</a>
             </li>
         </ul>
-    </div>
 </nav>
 
 <div class="container-fluid mt-3">
-    <div class="tab-content">
-        <!-- Translation Tab -->
-        <div class="tab-pane fade show active" id="translation">
+
             <div class="row">
                 <div class="col-md-6">
                     <p class="font-weight-bold">Исходный текст</p>
@@ -42,25 +36,14 @@
                     <textarea class="form-control" rows="20" id="translatedText" readonly></textarea>
                 </div>
             </div>
-        </div>
 
-        <!-- Examples Tab -->
-        <div class="tab-pane fade" id="examples">
-            <p>Examples content goes here.</p>
-        </div>
+            <!-- Translation Button -->
+            <div class="row mt-3">
+                <div class="col-md-6 offset-md-3 text-center">
+                    <button class="btn btn-primary" onclick="transliterate()">Транслитерировать</button>
+                </div>
+            </div>
 
-        <!-- About Project Tab -->
-        <div class="tab-pane fade" id="about">
-            <p>About Project content goes here.</p>
-        </div>
-    </div>
-
-    <!-- Translation Button -->
-    <div class="row mt-3">
-        <div class="col-md-6 offset-md-3 text-center">
-            <button class="btn btn-primary" onclick="transliterate()">Транслитерировать</button>
-        </div>
-    </div>
 </div>
 
 <!-- Bootstrap JS and jQuery -->
